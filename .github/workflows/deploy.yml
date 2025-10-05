@@ -52,6 +52,6 @@ jobs:
             /home/ubuntu/Badminton_DevOps/venv/bin/python manage.py migrate --noinput
             /home/ubuntu/Badminton_DevOps/venv/bin/python manage.py collectstatic --noinput
             pkill -f "manage.py runserver" || true
-            nohup /home/ubuntu/Badminton_DevOps/venv/bin/python manage.py runserver 0.0.0.0:8000 > server.log 2>&1 &
+            nohup /home/ubuntu/Badminton_DevOps/venv/bin/python manage.py runserver 0.0.0.0:8000 > server.logS &
             echo "✅ Server restarted successfully"
           ' || true
