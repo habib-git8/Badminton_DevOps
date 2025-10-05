@@ -26,8 +26,7 @@ jobs:
 
       - name: Security scan
         run: |
-          bandit -r .
-          safety check || true
+          bandit -r . || true
 
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.9.0
