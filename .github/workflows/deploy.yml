@@ -51,5 +51,5 @@ jobs:
             /home/ubuntu/Badminton_DevOps/venv/bin/pip install -r requirements.txt
             /home/ubuntu/Badminton_DevOps/venv/bin/python manage.py migrate --noinput
             /home/ubuntu/Badminton_DevOps/venv/bin/python manage.py collectstatic --noinput
-            sudo systemctl restart gunicorn
+
           '
