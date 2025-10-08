@@ -22,11 +22,25 @@ jobs:
           pip install flake8 bandit safety
 
       - name: Lint
-        run: flake8 . || true
-
-      - name: Security scan
+        run: flake8 .
+      - name: Run static analysis (flake8 + pylint)
         run: |
-          bandit -r . || true
+          pip install flake8 pylint
+          flake8 . --max-line-length=120 --statistics
+          pylint $(git ls-files '*.py') --exit-zero
+
+
+      - name: Security Vulnerability Scan
+        run: |
+          pip install bandit safety detect-secrets
+          echo "🔍 Running Bandit (Python source code security scan)..."
+          bandit -r . -f txt -o bandit-report.txt || true
+
+          echo "🧩 Running Safety (dependency vulnerability check)..."
+          safety check -r requirements.txt --full-report || true
+
+          echo "🔑 Checking for hardcoded secrets..."
+          detect-secrets scan > detect-secrets-report.json
 
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.9.0
@@ -54,3 +68,11 @@ jobs:
             nohup /home/ubuntu/Badminton_DevOps/venv/bin/python manage.py runserver 0.0.0.0:8000 > server.log &
             echo "✅ Server restarted successfully"
           ' || true
+      - name: Upload analysis reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            bandit-report.txt
+            detect-secrets-report.json
+
