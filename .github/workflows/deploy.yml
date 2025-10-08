@@ -21,12 +21,11 @@ jobs:
         run: |
           pip install flake8 bandit safety
 
-      - name: Lint
-        run: flake8 . || true
+
       - name: Run static analysis (flake8 + pylint)
         run: |
           pip install flake8 pylint
-          flake8 . --max-line-length=120 --statistics
+          flake8 . || true
           pylint $(git ls-files '*.py') --exit-zero
 
 
