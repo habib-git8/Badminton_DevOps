@@ -1,46 +1,118 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="homepage-container">
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #e0f7fa, #e3f2fd);
+    min-height: 100vh;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    color: #0d47a1;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: #37474f;
+    margin-bottom: 30px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  .hero img {
+    width: 120px;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite ease-in-out;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .btn-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    background-color: #1565c0;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    background-color: #0d47a1;
+    transform: translateY(-2px);
+  }
+
+  .btn.secondary {
+    background-color: white;
+    color: #1565c0;
+    border: 1px solid #1565c0;
+  }
+
+  .btn.secondary:hover {
+    background-color: #e3f2fd;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #607d8b;
+  }
+</style>
+
+<div class="hero">
+  <img src="https://cdn-icons-png.flaticon.com/512/2821/2821648.png" alt="Badminton Icon" />
+  
   {% if user.is_authenticated %}
-    <h2>🏸 Welcome, {{ user.username }}!</h2>
-    <p>You’re logged in and ready to book your court.</p>
-    <a href="{% url 'booking_list' %}" class="btn">Book a Court</a>
+    <h1>Welcome back, {{ user.username }} 🏸</h1>
+    <p>
+      Ready to hit the court? Book your preferred time slot and manage your reservations effortlessly.  
+      Stay active, stay sharp, and let the game begin!
+    </p>
+    <div class="btn-container">
+      <a href="{% url 'booking_list' %}" class="btn">Book a Court</a>
+      <a href="{% url 'logout' %}" class="btn secondary">Logout</a>
+    </div>
   {% else %}
-    <h2>🏸 Welcome to the Badminton Court Booking System</h2>
-    <p>Please log in or register to start booking courts.</p>
-    <a href="{% url 'login' %}" class="btn">Login</a>
-    <a href="{% url 'signup' %}" class="btn secondary">Sign Up</a>
+    <h1>Welcome to the Badminton Court Booking System</h1>
+    <p>
+      A smart way to reserve badminton courts online — simple, quick, and available anytime.  
+      Log in to manage your bookings or sign up to get started.
+    </p>
+    <div class="btn-container">
+      <a href="{% url 'login' %}" class="btn">Login</a>
+      <a href="{% url 'signup' %}" class="btn secondary">Sign Up</a>
+    </div>
   {% endif %}
 </div>
 
-<style>
-  .homepage-container {
-    text-align: center;
-    padding: 60px 20px;
-  }
-  .homepage-container h2 {
-    font-size: 1.8rem;
-    color: #333;
-  }
-  .homepage-container p {
-    color: #666;
-    margin-bottom: 20px;
-  }
-  .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #0078D4;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    margin: 5px;
-  }
-  .btn.secondary {
-    background-color: #555;
-  }
-  .btn:hover {
-    background-color: #005fa3;
-  }
-</style>
+<div class="footer">
+  <p>© 2025 Badminton Booking | Built with Django & AWS EC2 | CI/CD by GitHub Actions</p>
+</div>
+
 {% endblock %}
