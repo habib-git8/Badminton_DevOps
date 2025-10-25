@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="homepage-container">
+  {% if user.is_authenticated %}
+    <h2>🏸 Welcome, {{ user.username }}!</h2>
+    <p>You’re logged in and ready to book your court.</p>
+    <a href="{% url 'booking_list' %}" class="btn">Book a Court</a>
+  {% else %}
+    <h2>🏸 Welcome to the Badminton Court Booking System</h2>
+    <p>Please log in or register to start booking courts.</p>
+    <a href="{% url 'login' %}" class="btn">Login</a>
+    <a href="{% url 'signup' %}" class="btn secondary">Sign Up</a>
+  {% endif %}
+</div>
+
+<style>
+  .homepage-container {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .homepage-container h2 {
+    font-size: 1.8rem;
+    color: #333;
+  }
+  .homepage-container p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0078D4;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    margin: 5px;
+  }
+  .btn.secondary {
+    background-color: #555;
+  }
+  .btn:hover {
+    background-color: #005fa3;
+  }
+</style>
+{% endblock %}

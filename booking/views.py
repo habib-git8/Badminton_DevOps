@@ -41,6 +41,9 @@ def booking_create(request):
             messages.error(request, str(e))
     return render(request, "bookings/form.html", {"form": form})
 
+def home(request):
+    return render(request, 'home.html')
+
 # COURTS
 def court_edit(request, pk):
     court = get_object_or_404(Court, pk=pk)
