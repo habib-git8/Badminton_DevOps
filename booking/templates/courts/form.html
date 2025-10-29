@@ -1,26 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="card shadow-sm">
-  <div class="card-body">
-    <h3 class="mb-3">{{ form.instance.pk|yesno:"Edit Court,Add Court" }}</h3>
-    <form method="post" class="needs-validation">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-success">Save</button>
-      <a href="{% url 'court_list' %}" class="btn btn-secondary">Cancel</a>
-    </form>
-  </div>
-</div>
-{% endblock %}
-{% extends "base.html" %}
-{% block content %}
 <style>
   body {
     background-color: #f8f9fa;
     font-family: "Poppins", sans-serif;
   }
 
-  .booking-container {
+  .court-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +14,7 @@
     min-height: 80vh;
   }
 
-  .booking-card {
+  .court-card {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -38,7 +24,7 @@
     transition: transform 0.3s ease;
   }
 
-  .booking-card:hover {
+  .court-card:hover {
     transform: translateY(-4px);
   }
 
@@ -112,10 +98,10 @@
   }
 </style>
 
-<div class="booking-container">
-  <div class="booking-card">
-    <h3>{{ form.instance.pk|yesno:"Edit Court,New Court" }}</h3>
-    <form method="post">
+<div class="court-container">
+  <div class="court-card">
+    <h3>{{ form.instance.pk|yesno:"Edit Court,Add Court" }}</h3>
+    <form method="post" class="needs-validation">
       {% csrf_token %}
       {{ form.as_p }}
       <div class="btn-container">
